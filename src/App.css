@@ -26,6 +26,15 @@
   }
 }
 
+@media (max-width: 768px) {
+  .linkadd-area {
+      float: right !important;
+    max-width: calc(100vw - 4rem);
+    right: 2rem;
+    bottom: 2rem;
+  }
+}
+
 .my-masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */

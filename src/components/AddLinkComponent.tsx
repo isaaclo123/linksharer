@@ -24,7 +24,9 @@ function AddLinkComponent({ onAdd, loading, onModified = () => { }, variant = "p
 
     if (!hovered && !inputClicked) {
         return (
-            <Button variant={variant} onMouseEnter={() => setHovered(true)}>
+            <Button variant={variant}
+                onClick={() => setInputClicked(true)}
+                onMouseEnter={() => setHovered(true)}>
                 + Add New Link
             </Button>
 
@@ -33,13 +35,20 @@ function AddLinkComponent({ onAdd, loading, onModified = () => { }, variant = "p
         return (
             <InputGroup
                 ref={ref}
-                onMouseLeave={() => setHovered(false)}
-                onClick={() => setInputClicked(true)}
-                style={{ minWidth: "calc(100%-4em)" }}>
-                <Button variant={variant}>Add New Link</Button>
+                onMouseLeave={() => setHovered(false)}>
+                <Button variant={variant}
+                    onClick={() => {
+                    setHovered(false)
+                    setInputClicked(false)
+                    }}
+                >
+                    Add New Link
+
+                </Button>
                 <FormControl aria-label="Enter Url..."
                     disabled={loading}
                     value={urlInput}
+                    onClick={() => setInputClicked(true)}
                     onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                             onAdd(urlInput);
