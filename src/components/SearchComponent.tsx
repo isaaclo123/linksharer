@@ -116,7 +116,7 @@ function SearchComponent() {
             <Overlay target={target.current} show={show} placement="bottom-end">
                 <Card className="search-container"
                     onMouseOver={() => setShow(true)}
-                    onMouseOut={() => setShow(false)}>
+                    onMouseOut={() => !inputClicked && setShow(false)}>
                     <ListGroup variant="flush">
                         {error && (
                             <ListGroup.Item variant="danger">
