@@ -1,17 +1,12 @@
-import { Alert, Col, Row } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Alert } from 'react-bootstrap';
 import { Bookmark, BookmarksResponse } from "../models/Bookmark";
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AddLinkComponent from '../components/AddLinkComponent';
 
 
-import Amplify, { API } from 'aws-amplify';
-import awsconfig from '../aws-exports';
-import { ErrorResponse } from '../models/Error';
+import { API } from 'aws-amplify';
 import BookmarkCardComponent from '../components/BookmarkCardComponent';
-import SearchComponent from '../components/SearchComponent';
 import Masonry from 'react-masonry-css';
 
 var _ = require('lodash');
@@ -20,10 +15,9 @@ const initialState: BookmarksResponse = {
     bookmarks: []
 };
 
-const initialError: string | null = null;
-
 function BookmarksPage() {
     const [state, setState] = useState(initialState);
+    const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [linkError, setLinkError] = useState("");
     const [linkLoading, setLinkLoading] = useState(false);
@@ -48,18 +42,23 @@ function BookmarksPage() {
         <>
             {error && <Alert variant="danger">{error}</Alert>}
             <Masonry
-              breakpointCols={{
-                  default: 3,
-                  1100: 2,
-                  700: 1,
+                breakpointCols={{
+                    default: 3,
+                    1100: 2,
+                    700: 1,
                 }}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column">
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column">
                 {
-                    state.bookmarks?.map((bookmark: Bookmark) => {
+                    state.bookmarks?.map((bookmark: Bookmark, index) => {
                         return (
-                            <div key={bookmark.id}>
+                            <div
+                                key={bookmark.id}
+                                onMouseOut={index === 0 ? () => {
+                                    setSuccess(false)
+                                } : undefined}>
                                 <BookmarkCardComponent
+                                    border={(success && index === 0) ? "primary" : undefined}
                                     bookmark={bookmark}
                                     onClick={() => {
                                         console.log(bookmark);
@@ -74,11 +73,12 @@ function BookmarksPage() {
                                                     });
                                                 console.log(req);
                                                 setState({
-                                                    bookmarks: _.filter(state.bookmarks, (b: Bookmark) => b.id != bookmark.id)
+                                                    bookmarks: _.filter(state.bookmarks, (b: Bookmark) => b.id !== bookmark.id)
                                                 })
                                             } catch (error: any) {
                                                 console.log(error.response?.data.error)
-                                                setError((error?.response?.data?.error as string) || "Unknown Error Occoured while deleting card!");
+                                                setError(error.response?.data.error)
+                                                setSuccess(false);
                                             }
                                         }
                                         )()
@@ -89,7 +89,7 @@ function BookmarksPage() {
                 }
             </Masonry>
 
-            <div className="linkadd-area" style={{position: "fixed"}}>
+            <div className="linkadd-area" style={{ position: "fixed" }}>
                 {linkError && <Alert variant="danger">{linkError}</Alert>}
 
                 <AddLinkComponent
@@ -106,15 +106,22 @@ function BookmarksPage() {
                                             url: input
                                         },
                                     });
-                                    setState({
-                                        bookmarks: [req.data].concat(state.bookmarks)
-                                    });
-                                    setLinkLoading(false);
+                                setSuccess(true);
+                                setState({
+                                    bookmarks: [req.data].concat(state.bookmarks)
+                                });
+                                setLinkLoading(false);
                             } catch (error: any) {
                                 setLinkLoading(false);
                                 console.log(error)
+                                setSuccess(false);
                                 setLinkError((error?.response?.data?.error as string) || "Unknown Error Occoured!");
                             }
+                            window.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: "smooth",
+                            });
                         })()
                     }}
                     onModified={() => {

@@ -1,21 +1,20 @@
-import { Button, ButtonGroup, Card, Spinner } from "react-bootstrap";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-import { useEffect, useState, useRef } from "react";
-import { useOnClickOutside } from 'usehooks-ts';
+import { Button, ButtonGroup, Card } from "react-bootstrap";
+import { useState } from "react";
 import { Bookmark } from "../models/Bookmark";
 
 interface BookmarkCardComponentProps {
     bookmark: Bookmark
+    border?: string
     onDelete: () => void
     onClick: () => void
 }
 
-function BookmarkCardComponent({ bookmark, onClick, onDelete }: BookmarkCardComponentProps) {
+function BookmarkCardComponent({ border, bookmark, onClick, onDelete }: BookmarkCardComponentProps) {
     const [hovered, setHovered] = useState(false);
 
     return (
         <Card
+            border={border}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
             {hovered && (
@@ -30,6 +29,7 @@ function BookmarkCardComponent({ bookmark, onClick, onDelete }: BookmarkCardComp
                 </ButtonGroup>
             )}
             <Card.Img className="hover-zoom" variant="top" src={bookmark.imageThumb} onClick={onClick} />
+            <hr style={{ padding: 0, margin: 0 }} />
             <Card.Body>
                 <Card.Text>
                     <Card.Title onClick={onClick} className="hover-title">

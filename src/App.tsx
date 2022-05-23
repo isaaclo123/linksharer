@@ -1,9 +1,7 @@
 import './App.css';
 import Nav from 'react-bootstrap/Nav';
-import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import { Button, Navbar, NavDropdown, } from 'react-bootstrap';
+import { Navbar, NavDropdown } from 'react-bootstrap';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import BookmarksPage from './pages/BookmarksPage';
 import BookmarksViewPage from './pages/BookmarkViewPage';
@@ -16,7 +14,7 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import awsExports from './aws-exports';
 import SearchComponent from './components/SearchComponent';
-import { useRef } from 'react';
+
 Amplify.configure(awsExports);
 
 function App() {
@@ -37,11 +35,7 @@ function App() {
                                         style={{ maxHeight: '100px' }}
                                         navbarScroll
                                     >
-                                        <NavDropdown
-                                            id="nav-dropdown-dark-example"
-                                            title={user?.attributes?.email}
-                                            menuVariant="dark"
-                                        >
+                                        <NavDropdown title={user?.attributes?.email}>
                                             <NavDropdown.Item onClick={signOut}>Sign Out</NavDropdown.Item>
                                         </NavDropdown>
                                     </Nav>
