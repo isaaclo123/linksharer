@@ -56,7 +56,7 @@ function BookmarkViewPage() {
         <Card className="text-center">
             <Card.Header>{state.title}</Card.Header>
             <Card.Img src={state.image} />
-            <hr style={{ padding: 0, margin: 0 }} />
+            <hr className="m-0 p-0"/>
             <Card.Body>
                 <Card.Text>
                     URL: <Card.Link href={state.url}>{state.url}</Card.Link>

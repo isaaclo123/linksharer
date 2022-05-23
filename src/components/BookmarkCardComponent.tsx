@@ -29,7 +29,7 @@ function BookmarkCardComponent({ border, bookmark, onClick, onDelete }: Bookmark
                 </ButtonGroup>
             )}
             <Card.Img className="hover-zoom" variant="top" src={bookmark.imageThumb} onClick={onClick} />
-            <hr style={{ padding: 0, margin: 0 }} />
+            <hr className="m-0 p-0"/>
             <Card.Body>
                 <Card.Text>
                     <Card.Title onClick={onClick} className="hover-title">
