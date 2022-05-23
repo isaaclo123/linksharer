@@ -111,17 +111,17 @@ function BookmarksPage() {
                                     bookmarks: [req.data].concat(state.bookmarks)
                                 });
                                 setLinkLoading(false);
+                                window.scrollTo({
+                                    top: 0,
+                                    left: 0,
+                                    behavior: "smooth",
+                                });
                             } catch (error: any) {
                                 setLinkLoading(false);
                                 console.log(error)
                                 setSuccess(false);
                                 setLinkError((error?.response?.data?.error as string) || "Unknown Error Occoured!");
                             }
-                            window.scrollTo({
-                                top: 0,
-                                left: 0,
-                                behavior: "smooth",
-                            });
                         })()
                     }}
                     onModified={() => {
