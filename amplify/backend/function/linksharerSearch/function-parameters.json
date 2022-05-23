@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "storage": {
+      "linksharerDynamoDB": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "linksharerLambdaHelpers",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true,
+      "env": "test"
+    }
+  ]
+}

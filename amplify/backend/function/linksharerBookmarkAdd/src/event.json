@@ -1,0 +1,10 @@
+{
+    "body": "{\"url\": \"https://www.google.com\"}",
+    "requestContext": {
+    "identity": {
+    "cognitoIdentityId": "testtest"
+
+    }
+
+    }
+}

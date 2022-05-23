@@ -1,0 +1,26 @@
+{
+  "resourceName": "linksharerDynamoDB",
+  "tableName": "bookmarks",
+  "partitionKey": {
+    "fieldName": "url",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "created_date",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "UserIDGSI",
+      "partitionKey": {
+        "fieldName": "user_id",
+        "fieldType": "string"
+      },
+      "sortKey": {
+        "fieldName": "created_date",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "paths": {
+    "/bookmarkadd": {
+      "name": "/bookmarkadd",
+      "lambdaFunction": "linksharerBookmarkAdd",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    "/bookmarks": {
+      "name": "/bookmarks",
+      "lambdaFunction": "linksharerBookmarksBasic",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "read",
+          "delete"
+        ],
+        "guest": [
+          "read"
+        ]
+      }
+    },
+    "/search": {
+      "name": "/search",
+      "lambdaFunction": "linksharerSearch",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "read"
+        ],
+        "guest": [
+          "read"
+        ]
+      }
+    }
+  }
+}

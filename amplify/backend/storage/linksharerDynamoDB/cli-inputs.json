@@ -1,0 +1,13 @@
+{
+  "resourceName": "linksharerDynamoDB",
+  "tableName": "bookmarks",
+  "partitionKey": {
+    "fieldName": "userId",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "triggerFunctions": []
+}

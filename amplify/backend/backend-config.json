@@ -1,0 +1,170 @@
+{
+  "auth": {
+    "linksharer2c77af66": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
+    }
+  },
+  "storage": {
+    "linksharerDynamoDB": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "linksharerBookmarksImages": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  },
+  "function": {
+    "linksharerBookmarkAdd": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "linksharerDynamoDB",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "linksharerBookmarksImages",
+          "attributes": [
+            "BucketName"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "linksharerLambdaHelpers",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "linksharerBookmarksBasic": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "linksharerDynamoDB",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "linksharerBookmarksImages",
+          "attributes": [
+            "BucketName"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "linksharerLambdaHelpers",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "linksharerLambdaHelpers": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "linksharerSearch": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "linksharerDynamoDB",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "linksharerLambdaHelpers",
+          "attributes": [
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "api": {
+    "linksharerBookmarksApi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "linksharerBookmarkAdd",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "linksharerBookmarksBasic",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "linksharerSearch",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
+    }
+  }
+}

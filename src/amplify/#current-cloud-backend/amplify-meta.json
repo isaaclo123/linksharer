@@ -1,0 +1,122 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-frontend-dev-100620-authRole",
+      "UnauthRoleArn": "arn:aws:iam::960619553947:role/amplify-frontend-dev-100620-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::960619553947:role/amplify-frontend-dev-100620-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-frontend-dev-100620-deployment",
+      "UnauthRoleName": "amplify-frontend-dev-100620-unauthRole",
+      "StackName": "amplify-frontend-dev-100620",
+      "StackId": "arn:aws:cloudformation:us-east-2:960619553947:stack/amplify-frontend-dev-100620/14970500-d6bc-11ec-b07d-06c68cc13060",
+      "AmplifyAppId": "d2cx37hik7u617"
+    }
+  },
+  "storage": {
+    "linksharerDynamoDB": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-frontend-dev-100620-deployment/amplify-cfn-templates/storage/linksharerDynamoDB-cloudformation-template.json",
+        "logicalId": "storagelinksharerDynamoDB"
+      },
+      "lastPushTimeStamp": "2022-05-18T19:27:01.594Z",
+      "output": {
+        "PartitionKeyName": "url",
+        "SortKeyName": "created_date",
+        "SortKeyType": "S",
+        "Region": "us-east-2",
+        "Arn": "arn:aws:dynamodb:us-east-2:960619553947:table/bookmarks-dev",
+        "StreamArn": "arn:aws:dynamodb:us-east-2:960619553947:table/bookmarks-dev/stream/2022-05-18T19:03:59.794",
+        "PartitionKeyType": "S",
+        "Name": "bookmarks-dev"
+      },
+      "lastPushDirHash": "WxUu6MCg3N+ZKZiYHvHtGWTyq1c="
+    }
+  },
+  "function": {
+    "linksharerBookmarksApi": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "linksharerDynamoDB",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ],
+      "lastBuildTimeStamp": "2022-05-18T19:03:47.445Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-05-18T19:03:47.881Z",
+      "distZipFilename": "linksharerBookmarksApi-6d624b32617859594e30-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-frontend-dev-100620-deployment",
+        "s3Key": "amplify-builds/linksharerBookmarksApi-6d624b32617859594e30-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-frontend-dev-100620-deployment/amplify-cfn-templates/function/linksharerBookmarksApi-cloudformation-template.json",
+        "logicalId": "functionlinksharerBookmarksApi"
+      },
+      "lastPushTimeStamp": "2022-05-18T19:27:01.594Z",
+      "output": {
+        "Region": "us-east-2",
+        "Arn": "arn:aws:lambda:us-east-2:960619553947:function:linksharerBookmarksApi-dev",
+        "Name": "linksharerBookmarksApi-dev",
+        "LambdaExecutionRole": "frontendLambdaRole7806a842-dev"
+      },
+      "lastPushDirHash": "EjEuzB1fqpihdU+Q63j/EcDXgqQ="
+    }
+  },
+  "api": {},
+  "auth": {
+    "frontend42fd685e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-frontend-dev-100620-deployment/amplify-cfn-templates/auth/frontend42fd685e-cloudformation-template.json",
+        "logicalId": "authfrontend42fd685e"
+      },
+      "lastPushTimeStamp": "2022-05-18T19:27:01.814Z",
+      "output": {
+        "UserPoolId": "us-east-2_8SP6BV7zl",
+        "AppClientIDWeb": "3u7kckth55bkd14u83fp0v317p",
+        "AppClientID": "24phami87t15sadmsj7pupbd2v",
+        "IdentityPoolId": "us-east-2:b30fafe9-60e0-4055-a25c-7c9b17eddff9",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:960619553947:userpool/us-east-2_8SP6BV7zl",
+        "IdentityPoolName": "frontend42fd685e_identitypool_42fd685e__dev",
+        "UserPoolName": "frontend42fd685e_userpool_42fd685e"
+      },
+      "lastPushDirHash": "onsJ/t2TXR4FrD7FZOoRxTfUuNA="
+    }
+  }
+}
