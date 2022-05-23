@@ -19,6 +19,7 @@ const AWS = require('aws-sdk')
 const sharp = require('sharp');
 const { uuid } = require('uuidv4');
 const chromium = require('chrome-aws-lambda');
+const prependHttp = require('prepend-http');
 const reply = require('/opt/nodejs/reply');
 
 AWS.config.update({ region: process.env.TABLE_REGION });
@@ -35,13 +36,15 @@ const THUMB_WIDTH = 640;
 
 const addBookmark = async (event, userId) => {
     const body = JSON.parse(event.body)
-    const url = body?.url;
+    const bodyUrl = body?.url;
 
-    if (!url) {
+    if (!bodyUrl) {
         return reply(500, {
             error: "Invalid input of url"
         });
     }
+
+    const url = prependHttp(bodyUrl);
 
     console.log(`URL: ${url}`);
 

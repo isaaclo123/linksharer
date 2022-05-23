@@ -1,22 +1,18 @@
-import { Alert, Button, Card, InputGroup, ListGroup, Popover, PopoverBody, Spinner } from "react-bootstrap";
+import { Button, Card, ListGroup, Spinner } from "react-bootstrap";
 import Overlay from 'react-bootstrap/Overlay';
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import { useEffect, useState, useRef, Ref } from "react";
+import { useState, useRef } from "react";
 import { useOnClickOutside } from 'usehooks-ts';
-import { Bookmark } from "../models/Bookmark";
 import { API } from "aws-amplify";
 import { SearchResponse, SearchResult } from "../models/SearchResult";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const initialState: SearchResponse = {
     results: []
 }
 
-interface SearchComponentProps {
-}
-
-function SearchComponent({ }: SearchComponentProps) {
+function SearchComponent() {
     const [inputClicked, setInputClicked] = useState(false);
     const [loading, setLoading] = useState(false);
     const [input, setInput] = useState("");
@@ -79,7 +75,7 @@ function SearchComponent({ }: SearchComponentProps) {
                     setShow(true)
                 }}
                 onKeyPress={(e) => {
-                    if (e.which == 13) {
+                    if (e.which === 13) {
                         e.preventDefault();
                     }
 
@@ -107,14 +103,14 @@ function SearchComponent({ }: SearchComponentProps) {
                     })()
 
                 }}>
-                {loading && (
+                {loading ? (
                     <Spinner
                         as="span"
                         animation="border"
                         size="sm"
                         role="status"
                         aria-hidden="true"
-                    />) ||
+                    />) :
                     (<i className="fas fa-search"></i>)}
             </Button>
             <Overlay target={target.current} show={show} placement="bottom-end">

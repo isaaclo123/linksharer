@@ -1,47 +1,4 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-linksharer-dev-203129-authRole",
-      "UnauthRoleArn": "arn:aws:iam::960619553947:role/amplify-linksharer-dev-203129-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::960619553947:role/amplify-linksharer-dev-203129-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-linksharer-dev-203129-deployment",
-      "UnauthRoleName": "amplify-linksharer-dev-203129-unauthRole",
-      "StackName": "amplify-linksharer-dev-203129",
-      "StackId": "arn:aws:cloudformation:us-east-2:960619553947:stack/amplify-linksharer-dev-203129/12eedaf0-da38-11ec-9aa6-06bda9f69f0a",
-      "AmplifyAppId": "d2n9xvb9ok4rq6",
-      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-linksharer-dev-203129-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
-    },
-    "categories": {
-      "auth": {
-        "linksharer2c77af66": {}
-      },
-      "function": {
-        "linksharerBookmarkAdd": {
-          "deploymentBucketName": "amplify-linksharer-dev-203129-deployment",
-          "s3Key": "amplify-builds/linksharerBookmarkAdd-3833374c544d56387a33-build.zip"
-        },
-        "linksharerBookmarksBasic": {
-          "deploymentBucketName": "amplify-linksharer-dev-203129-deployment",
-          "s3Key": "amplify-builds/linksharerBookmarksBasic-6d7367364857512b3244-build.zip"
-        },
-        "linksharerSearch": {
-          "deploymentBucketName": "amplify-linksharer-dev-203129-deployment",
-          "s3Key": "amplify-builds/linksharerSearch-45537165644c50764c39-build.zip"
-        },
-        "linksharerLambdaHelpers": {
-          "deploymentBucketName": "amplify-linksharer-dev-203129-deployment",
-          "s3Key": "amplify-builds/linksharerLambdaHelpers-LambdaLayerVersion09bed1d5-build.zip"
-        }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2n9xvb9ok4rq6",
-          "type": "manual"
-        }
-      }
-    }
-  },
   "test": {
     "awscloudformation": {
       "AuthRoleName": "amplify-linksharer-test-220502-authRole",
@@ -62,7 +19,7 @@
       "function": {
         "linksharerBookmarkAdd": {
           "deploymentBucketName": "amplify-linksharer-test-220502-deployment",
-          "s3Key": "amplify-builds/linksharerBookmarkAdd-3833374c544d56387a33-build.zip"
+          "s3Key": "amplify-builds/linksharerBookmarkAdd-4577324b5a6862386746-build.zip"
         },
         "linksharerBookmarksBasic": {
           "deploymentBucketName": "amplify-linksharer-test-220502-deployment",
