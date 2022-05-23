@@ -4,7 +4,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { Button, Navbar, NavDropdown, } from 'react-bootstrap';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import BookmarksPage from './pages/BookmarksPage';
 import BookmarksViewPage from './pages/BookmarkViewPage';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -24,7 +24,7 @@ function App() {
         <Authenticator>
             {
                 ({ signOut, user }) => (
-                    <BrowserRouter>
+                    <HashRouter>
                         <Navbar bg='light' expand="lg" fixed='top'>
                             <Container fluid>
                                 <LinkContainer to="/">
@@ -56,7 +56,7 @@ function App() {
                                 <Route path="/bookmarks/:id" element={<BookmarksViewPage />} />
                             </Routes>
                         </Container>
-                    </BrowserRouter>
+                    </HashRouter>
                 )
             }
         </Authenticator >
